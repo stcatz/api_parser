@@ -39,7 +39,14 @@ POST /payment
 { "cc": "12345678900", "cvc": "123", "expiry": "0112" }
 < 200
 { "receipt": "/payment/receipt/1" }`
-	a, _ := api_parser.Parse(s)
+	a, _ := api_parser.Parse(s, api_parser.Yaml)
 
-	fmt.Printf(string(a))
+	fmt.Println(string(a))
+
+	b, _ := api_parser.ConstructYaml(a)
+
+	for k, v := range b {
+		fmt.Println(k, "is string:", v)
+	}
+
 }
